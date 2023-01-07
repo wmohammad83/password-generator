@@ -88,13 +88,29 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var passwordCriteria = {
-  characters: 0,
-  uppercase: false,
-  lowercase: false,
-  numeric: false,
-  specialCharacters: false
+var options = {
+  uppercase: true,
+  lowercase: true,
+  numeric: true,
+  specialCharacters: true
 }
+
+
+// =================================================================================================
+// The function below generates random characters from an arrar and adds it to word
+// =================================================================================================
+
+function generate(arr, numLetters) {
+  word = ''
+  for(i=0; i < numLetters; i++) {
+    var randomLetter = arr[Math.floor(Math.random() * arr.length)];
+    word = word + randomLetter
+  }
+  return word
+}
+
+
+
 
 var randomNumbers = {
   characterType: [],
@@ -134,18 +150,29 @@ if(passwordCriteria.specialCharacters){
 }
 
 // Function for getting a random element from an array
-function getRandom(arr) {
+function getRandom(arr, a) {
   var num = Math.floor(Math.random() * arr.length)
-  // currently getting a .5 number which may cause issues
-  return num
+  a.push(num)
+  
 }
 
 // Function to generate password with user input
 function generatePassword() {
-  getPasswordOptions()
- 
-  console.log(passwordCriteria.characters / randomNumbers.characterType.length)
+  // getPasswordOptions()
+ var test1 = generate(lowerCasedCharacters, 5)
+ var test2 = generate(upperCasedCharacters, 5)
+ var test3 = generate(specialCharacters, 5)
+ var test4 = generate(numericCharacters, 5)
+
+ var password = test1 + test2 + test3 + test4
+
+  return password
+
+  
 }
+
+
+
 
 
 // =================================================================================================
