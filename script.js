@@ -89,10 +89,78 @@ var upperCasedCharacters = [
 ];
 
 var options = {
-  uppercase: true,
-  lowercase: true,
-  numeric: true,
-  specialCharacters: true
+  lettersLength: 0,
+  uppercase: false,
+  lowercase: false,
+  numeric: false,
+  specialCharacters: false,
+  passwordLength: 0
+}
+
+function test(){
+// if(options.lettersLength < 10 && options.lettersLength > 64){
+//   options.lettersLength = prompt('enter password length from 10 to 64')
+// } else{
+//   console.log("too short")
+// }
+
+while(options.lettersLength < 10 && options.lettersLength > 64){
+  prompt('enter password length from 10 to 64')
+  
+// return options.lettersLength
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function passwordSplit(){  
+  if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters){
+    var passwordLength = options.lettersLength / 4
+  } else if(options.uppercase && options.lowercase && options.numeric || options.lowercase && options.numeric && options.specialCharacters || options.uppercase && options.numeric && options.specialCharacters || options.lowercase && options.numeric && options.specialCharacters){
+    var passwordLength = options.lettersLength / 3
+  } else if(options.uppercase && options.lowercase || options.numeric && options.specialCharacters || options.uppercase && options.specialCharacters || options.lowercase && options.numeric || options.uppercase && options.numeric || options.lowercase && options.specialCharacters){
+    var passwordLength = options.lettersLength / 2
+  }
+  
+  // if ((options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters) ){
+  //   var passwordLength = options.lettersLength / 3
+  // }
+
+  // else if ((options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters)){
+  //   var passwordLength = options.lettersLength / 2
+  // }
+  
+  // else if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters) {
+  //   var passwordLength = options.lettersLength / 4
+  // }
+  
+  return options.passwordLength = passwordLength
 }
 
 
@@ -100,7 +168,132 @@ var options = {
 // The function below generates random characters from an arrar and adds it to word
 // =================================================================================================
 
-function generate(arr, numLetters) {
+// function generate(arr, numLetters) {
+//   word = ''
+//   for(i=0; i < numLetters; i++) {
+//     var randomLetter = arr[Math.floor(Math.random() * arr.length)];
+//     word = word + randomLetter
+//   }
+//   return word
+// }
+
+
+function passwordGenerated(numLetters){
+var pass = ""
+// all options true
+  if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    var test3 = getRandom(specialCharacters, numLetters)
+    var test4 = getRandom(numericCharacters, numLetters)
+    pass = test1 + test2 + test3 + test4
+  } 
+  
+  // three options true
+  else if(options.uppercase && options.lowercase && options.numeric){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    var test3 = getRandom(numericCharacters, numLetters)
+    pass = test1 + test2 + test3
+  }
+  else if(options.uppercase && options.lowercase && options.specialCharacters){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    var test3 = getRandom(specialCharacters, numLetters)
+    pass = test1 + test2 + test3
+  } else if(options.uppercase && options.specialCharacters && options.numeric){
+    var test1 = getRandom(specialCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    var test3 = getRandom(numericCharacters, numLetters)
+    pass = test1 + test2 + test3
+  }else if(options.specialCharacters && options.lowercase && options.numeric){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(specialCharacters, numLetters)
+    var test3 = getRandom(numericCharacters, numLetters)
+    pass = test1 + test2 + test3
+  }
+  
+  // two options true
+  else if(options.lowercase && options.uppercase){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    pass = test1 + test2
+  } else if(options.numeric && options.uppercase){
+    var test1 = getRandom(numericCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    pass = test1 + test2
+  } else if(options.specialCharacters && options.uppercase){
+    var test1 = getRandom(specialCharacters, numLetters)
+    var test2 = getRandom(upperCasedCharacters, numLetters)
+    pass = test1 + test2
+  }else if(options.lowercase && options.numeric){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(numericCharacters, numLetters)
+    pass = test1 + test2
+  }else if(options.lowercase && options.specialCharacters){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    var test2 = getRandom(specialCharacters, numLetters)
+    pass = test1 + test2
+  }else if(options.numeric && options.specialCharacters){
+    var test1 = getRandom(numericCharacters, numLetters)
+    var test2 = getRandom(specialCharacters, numLetters)
+    pass = test1 + test2
+  }
+  
+  
+  // one option true
+  else if(options.uppercase){
+    var test1 = getRandom(upperCasedCharacters, numLetters)
+    pass = test1
+  }else if(options.lowercase){
+    var test1 = getRandom(lowerCasedCharacters, numLetters)
+    pass = test1
+  }
+  else if(options.numeric){
+    var test1 = getRandom(numericCharacters, numLetters)
+    pass = test1
+  }
+  else if(options.specialCharacters){
+    var test1 = getRandom(specialCharacters, numLetters)
+    pass = test1
+  }
+   else{
+    var test5 ="Please select an option"
+    pass = test5
+  }
+  return pass
+}
+
+
+
+
+
+// Function to prompt user for password options
+function getPasswordOptions() {
+
+
+
+
+ 
+
+  options.lettersLength = prompt('enter password length from 10 to 64')
+
+
+
+
+
+  
+  
+  // Below is working fine
+  options.uppercase = confirm("uppercase letters?")
+  options.lowercase = confirm("lowercase letters?")
+  options.numeric = confirm("numeric letters?")
+  options.specialCharacters = confirm("special characters?")
+
+}
+
+// Function for getting a random element from an array
+function getRandom(arr, numLetters) {
   word = ''
   for(i=0; i < numLetters; i++) {
     var randomLetter = arr[Math.floor(Math.random() * arr.length)];
@@ -111,62 +304,13 @@ function generate(arr, numLetters) {
 
 
 
-
-var randomNumbers = {
-  characterType: [],
-  uppercase: [],
-  lowercase: [],
-  numeric: [],
-  specialCharacters:[]
-}
-
-// Function to prompt user for password options
-function getPasswordOptions() {
-// Length of password
-passwordCriteria.characters = prompt('Please choose a number of characters between 10 and 64')
-  
-// Lowercase
-passwordCriteria.lowercase = confirm('Would you like lowercase letters?')
-if(passwordCriteria.lowercase){
-  randomNumbers.characterType.push(true)
-}
-
-// Uppercase
-passwordCriteria.uppercase = confirm('Would you like uppercase letters?')
-if(passwordCriteria.uppercase){
-  randomNumbers.characterType.push(true)
-}
-
-// Numeric
-passwordCriteria.numeric = confirm('Would you like uppercase letters?')
-if(passwordCriteria.numeric){
-  randomNumbers.characterType.push(true)
-}
-// Special characters ($@%&*, etc)
-passwordCriteria.specialCharacters = confirm('Would you like special characters?')
-if(passwordCriteria.specialCharacters){
-  randomNumbers.characterType.push(true)
-}
-}
-
-// Function for getting a random element from an array
-function getRandom(arr, a) {
-  var num = Math.floor(Math.random() * arr.length)
-  a.push(num)
-  
-}
-
 // Function to generate password with user input
 function generatePassword() {
-  // getPasswordOptions()
- var test1 = generate(lowerCasedCharacters, 5)
- var test2 = generate(upperCasedCharacters, 5)
- var test3 = generate(specialCharacters, 5)
- var test4 = generate(numericCharacters, 5)
+  getPasswordOptions()
+  passwordSplit()
+ return passwordGenerated(options.passwordLength)
 
- var password = test1 + test2 + test3 + test4
 
-  return password
 
   
 }
