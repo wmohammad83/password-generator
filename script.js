@@ -94,50 +94,14 @@ var options = {
   lowercase: false,
   numeric: false,
   specialCharacters: false,
-  passwordLength: 0
+  passwordLength: 0,
+  inRange: false,
+  password: ""
 }
 
-function test(){
-// if(options.lettersLength < 10 && options.lettersLength > 64){
-//   options.lettersLength = prompt('enter password length from 10 to 64')
-// } else{
-//   console.log("too short")
-// }
-
-while(options.lettersLength < 10 && options.lettersLength > 64){
-  prompt('enter password length from 10 to 64')
-  
-// return options.lettersLength
+function inRange(x, min, max) {
+  return ((x-min)*(x-max) <= 0);
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function passwordSplit(){  
   if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters){
@@ -146,40 +110,15 @@ function passwordSplit(){
     var passwordLength = options.lettersLength / 3
   } else if(options.uppercase && options.lowercase || options.numeric && options.specialCharacters || options.uppercase && options.specialCharacters || options.lowercase && options.numeric || options.uppercase && options.numeric || options.lowercase && options.specialCharacters){
     var passwordLength = options.lettersLength / 2
-  }
-  
-  // if ((options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters) ){
-  //   var passwordLength = options.lettersLength / 3
-  // }
-
-  // else if ((options.uppercase || options.lowercase || options.numeric || options.specialCharacters) && (options.uppercase || options.lowercase || options.numeric || options.specialCharacters)){
-  //   var passwordLength = options.lettersLength / 2
-  // }
-  
-  // else if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters) {
-  //   var passwordLength = options.lettersLength / 4
-  // }
-  
+  }  
   return options.passwordLength = passwordLength
 }
 
 
-// =================================================================================================
-// The function below generates random characters from an arrar and adds it to word
-// =================================================================================================
-
-// function generate(arr, numLetters) {
-//   word = ''
-//   for(i=0; i < numLetters; i++) {
-//     var randomLetter = arr[Math.floor(Math.random() * arr.length)];
-//     word = word + randomLetter
-//   }
-//   return word
-// }
-
 
 function passwordGenerated(numLetters){
 var pass = ""
+
 // all options true
   if(options.uppercase && options.lowercase && options.numeric && options.specialCharacters){
     var test1 = getRandom(lowerCasedCharacters, numLetters)
@@ -259,10 +198,13 @@ var pass = ""
   }
    else{
     var test5 ="Please select an option"
+    alert("Please ensure password is between 10 and 64 and an option is selected")
     pass = test5
+   
   }
-  return pass
+  return options.password = pass
 }
+
 
 
 
@@ -271,25 +213,21 @@ var pass = ""
 // Function to prompt user for password options
 function getPasswordOptions() {
 
-
-
-
- 
-
+if(!inRange(options.lettersLength, 10,64)){  
+  options.inRange = false
   options.lettersLength = prompt('enter password length from 10 to 64')
 
+  if(inRange(options.lettersLength, 10,64)){
+    options.inRange = true
+    options.uppercase = confirm("uppercase letters?")
+    options.lowercase = confirm("lowercase letters?")
+    options.numeric = confirm("numeric letters?")
+    options.specialCharacters = confirm("special characters?")  
+  }
 
-
-
+} 
 
   
-  
-  // Below is working fine
-  options.uppercase = confirm("uppercase letters?")
-  options.lowercase = confirm("lowercase letters?")
-  options.numeric = confirm("numeric letters?")
-  options.specialCharacters = confirm("special characters?")
-
 }
 
 // Function for getting a random element from an array
@@ -306,16 +244,25 @@ function getRandom(arr, numLetters) {
 
 // Function to generate password with user input
 function generatePassword() {
+  reset()
   getPasswordOptions()
   passwordSplit()
- return passwordGenerated(options.passwordLength)
-
-
-
-  
+  passwordGenerated(options.passwordLength)
+  return options.password
 }
 
 
+
+function reset(){
+  options.lettersLength = 0,
+  options.uppercase = false,
+  options.lowercase = false,
+  options.numeric = false,
+  options.specialCharacters = false,
+  options.passwordLength = 0,
+  options.inRange = false,
+  options.password = ""
+}
 
 
 
