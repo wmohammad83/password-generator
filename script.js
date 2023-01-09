@@ -201,14 +201,14 @@ function shuffle(string) {
 function getPasswordOptions() {
 if(!inRange(options.lettersLength, 10,64)){  
   options.inRange = false
-  options.lettersLength = prompt('enter password length from 10 to 64')
+  options.lettersLength = prompt('Enter password length from 10 to 64')
 
   if(inRange(options.lettersLength, 10,64)){
     options.inRange = true
-    options.uppercase = confirm("uppercase letters?")
-    options.lowercase = confirm("lowercase letters?")
-    options.numeric = confirm("numeric letters?")
-    options.specialCharacters = confirm("special characters?")  
+    options.uppercase = confirm("Would you like uppercase letters characters in your password?")
+    options.lowercase = confirm("Would you like lowercase letters characters in your password?")
+    options.numeric = confirm("Would you like numeric values in your password?")
+    options.specialCharacters = confirm("Would you like special characters in your password?")  
   }
 } 
 }
